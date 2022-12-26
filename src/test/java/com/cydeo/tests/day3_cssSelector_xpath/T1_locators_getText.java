@@ -12,7 +12,7 @@ public class T1_locators_getText {
         //1- Open a Chrome browser
         //WebDriverManager.chromedriver().setup();
         //WebDriver driver = new ChromeDriver();
-        WebDriver driver = WebDriverFactory.getDriver("chrome");
+        WebDriver driver = WebDriverFactory.getDriver("chrome"); // imported from utilities
 
         driver.manage().window().maximize();
 
@@ -48,5 +48,7 @@ public class T1_locators_getText {
         }else{
             System.out.println("Error message verification FAILED!!!");
         }
+
+        driver.close();
     }
 }
