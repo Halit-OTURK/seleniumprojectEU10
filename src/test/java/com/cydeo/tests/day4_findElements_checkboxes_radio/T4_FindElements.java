@@ -5,32 +5,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 public class T4_FindElements {
     public static void main(String[] args) {
-        //TC #4: NextBaseCRM, locators, getText(), getAttribute() practice
+        //TC #4: FindElements Task
         //1- Open a Chrome browser
         WebDriver driver = WebDriverFactory.getDriver("chrome");
         driver.manage().window().maximize();
-        //2- Go to: https://login1.nextbasecrm.com/?forgot_password=yes
-        driver.get("https://login1.nextbasecrm.com/?forgot_password=yes");
 
-        //3- Verify “Reset password” button text is as expected:
-        //Expected: Reset password
-        //                  tagName[attribute='value']
+        //Providing extra wait time for our driver before it throws NoSuchElementException
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //locating reset password button using class attribute and its value
-        //WebElement resetPasswordButton = driver.findElement(By.cssSelector("button[class='login-btn']"));
+        //2- Go to: https://practice.cydeo.com/abtest
+        driver.get("https://practice.cydeo.com/abtest");
 
-        //locating reset password button using VALUE attribute and its value
-        WebElement resetPasswordButton = driver.findElement(By.cssSelector("button[value='Reset password']"));
+        //3- Locate all the links in the page.
+        //windows : alt+enter --> press enter again
+        //mac     : option + Enter --> press enter again
+        List<WebElement> allLinks =  driver.findElements(By.tagName("a"));
 
-        String expectedResetPasswordButtonText = "Reset password";
-        String actualResetPasswordButtonText = resetPasswordButton.getText();
+        //4- Print out the number of the links on the page.
+        System.out.println("allLinks.size() = " + allLinks.size());
 
-        if (actualResetPasswordButtonText.equals(expectedResetPasswordButtonText)){
-            System.out.println("Button text verification PASSED!");
-        }else{
-            System.out.println("Button text verification FAILED!");
+        //5- Print out the texts of the links.
+        //6- Print out the HREF attribute values of the links
+        for (WebElement each : allLinks) {
+
+            System.out.println("Text of link: " + each.getText());
+            System.out.println("HREF Values: " + each.getAttribute("href"));
         }
-    }
+
+        }
 }
